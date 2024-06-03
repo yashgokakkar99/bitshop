@@ -61,6 +61,11 @@ const loginUser = asyncHandler(async (req, res) => {
 const logoutCurrentUser = asyncHandler(async(req,res)=>{
   res.cookie('jwt','',{httpOnly:true,expires:new Date(0)})
   res.status(200).json({message:"logout successfully"});
-})
+});
 
-export { createUser, loginUser, logoutCurrentUser };
+const getAllUsers = asyncHandler(async(req,res)=>{
+  const users = await User.find({});
+  res.json(users);
+});
+
+export { createUser, loginUser, logoutCurrentUser, getAllUsers};
